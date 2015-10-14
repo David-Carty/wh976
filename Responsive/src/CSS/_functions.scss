@@ -1,0 +1,130 @@
+$base-font-size-px: 16 !default;
+
+@mixin clearfix {
+  // Used to clear floats. @include clearfix
+  &:before, &:after { content: " "; display: table; }
+  &:after { clear: both; }
+}
+
+@mixin centerAbsolute($horizontal: true, $vertical: true) {
+  //Used to center an ABSOLUTE object either vertically or horizontally.
+  //https://css-tricks.com/snippets/sass/centering-mixin/
+  //Both = .both {  @include center;}
+  //Horizontal = .horizontal {  @include center(true, false);}
+  //Vertical = .vertical {  @include center(false, true);}
+
+  position: absolute;
+  @if ($horizontal and $vertical) {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  } @else if ($horizontal) {
+    left: 50%;
+    transform: translate(-50%, 0);
+  } @else if ($vertical) {
+    top: 50%;
+    transform: translate(0, -50%);
+  }
+}
+
+@mixin preventSelect(){
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-tap-highlight-color: rgba(0,0,0,0); /* Prevents ipad selection */
+}
+
+
+// Hide element but ensure it remains accessible.
+// @see http://snook.ca/archives/html_and_css/hiding-content-for-accessibility
+@mixin element-hide {
+  clip: rect(1px, 1px, 1px, 1px);
+  height: 1px;
+  overflow: hidden;
+  position: absolute !important;
+  width: 1px;
+}
+
+// Turns off the element-hide.
+@mixin element-hide-off {
+  position: static !important;
+  height: auto;
+  width: auto;
+  overflow: visible;
+  clip: auto;
+}
+
+/******* functions **************/
+
+/* converts px to em */
+@function px-em($px, $base: $base-font-size-px) {
+  @return ($px / $base) * 1em;
+}
+
+/* converts px to rem */
+@function px-rem($px, $base: $base-font-size-px) {
+  @return ($px / $base) * 1rem;
+}
+
+/* Used with media queries lower range */
+@function lower-bound($range) {
+  @if length($range) <= 0 {
+    @return 0;
+  }
+  @return nth($range, 1);
+}
+
+/* Used with media queries upper range */
+@function upper-bound($range) {
+  @if length($range) < 2 {
+    @return 99999999;
+  }
+  @return nth($range, 2);
+}
+
+/* Border Radius  usage - @include border-top-radius(10px);*/
+@mixin border-radius($radius) {
+  -webkit-border-radius: $radius;
+  border-radius: $radius;
+  background-clip: padding-box;  /* stops bg color from leaking outside the border: */
+}
+
+// Single side border-radius
+
+@mixin border-top-radius($radius) {
+  -webkit-border-top-right-radius: $radius;
+  border-top-right-radius: $radius;
+  -webkit-border-top-left-radius: $radius;
+  border-top-left-radius: $radius;
+  background-clip: padding-box;
+}
+@mixin border-right-radius($radius) {
+  -webkit-border-bottom-right-radius: $radius;
+  border-bottom-right-radius: $radius;
+  -webkit-border-top-right-radius: $radius;
+  border-top-right-radius: $radius;
+  background-clip: padding-box;
+}
+@mixin border-bottom-radius($radius) {
+  -webkit-border-bottom-right-radius: $radius;
+  border-bottom-right-radius: $radius;
+  -webkit-border-bottom-left-radius: $radius;
+  border-bottom-left-radius: $radius;
+  background-clip: padding-box;
+}
+@mixin border-left-radius($radius) {
+  -webkit-border-bottom-left-radius: $radius;
+  border-bottom-left-radius: $radius;
+  -webkit-border-top-left-radius: $radius;
+  border-top-left-radius: $radius;
+  background-clip: padding-box;
+}
+/* add an ellipsis to the end of long text */
+@mixin ellipsis() {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}

@@ -1,0 +1,25 @@
+html,body{
+    height:100%;
+    width:100%;
+}
+body{
+    font-family:Gotham, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size:1.8em;
+    background-color: #1c036d;
+    color:#98c9f3;
+}
+.main-menu li {
+  list-style: none;
+}
+li .menu_label + input[type=checkbox] {
+  opacity: 0;
+}
+li .menu_label {
+  cursor: pointer; }
+li .menu_label + input[type=checkbox] + ul > li {
+  display: none; }
+li .menu_label + input[type=checkbox]:checked + ul > li {
+  display: block;
+}
+
+
