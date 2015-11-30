@@ -53,7 +53,7 @@ var WilliamHillHomeJS = (function () {
                 xmlhttp.open("GET", url, true);
                 xmlhttp.send();
             } catch (err) {
-                alert("loadJSON Error:" + err);
+                console.log("loadJSON Error:" + err);
                 /* log error */
             }
             return this;
